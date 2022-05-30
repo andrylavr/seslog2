@@ -1,0 +1,12 @@
+{
+  "clickhouse": {
+    "host": "localhost",
+    "port" : 19000,
+    "database" : "seslog2"
+  },
+  "listen": "127.0.0.1:5514",
+  "flush_interval": "60s",
+  "retry": 3,
+  "retry_timeout": "10s",
+  "write_on_fail": "/var/lib/seslog"
+}

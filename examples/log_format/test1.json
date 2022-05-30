@@ -1,0 +1,21 @@
+{
+  "time": "$time_iso8601",
+  "server_name": "$server_name",
+  "remote_addr": "$remote_addr",
+  "remote_user": "$remote_user",
+  "http_x_real_ip": "$http_x_real_ip",
+  "status_int": "$status",
+  "scheme": "$scheme",
+  "request_method": "$request_method",
+  "request_uri": "$request_uri",
+  "server_protocol": "$server_protocol",
+  "body_bytes_sent": "$body_bytes_sent",
+  "http_referer": "$http_referer",
+  "http_user_agent": "$http_user_agent",
+  "request_length": "$request_length",
+  "request_time": "$request_time",
+  "upstream_addr": "$upstream_addr",
+  "upstream_response_time": "$upstream_response_time",
+  "hostname": "$hostname",
+  "host": "$host"
+}
