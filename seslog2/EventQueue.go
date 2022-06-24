@@ -41,8 +41,9 @@ func NewEventQueue(tag string, clickHouse *ClickHouse) *EventQueue {
 		typedEvents: []TypedEvent{},
 		fields:      map[string]VarType{},
 		fieldNames:  []string{},
-		ttl:         60 * 24 * time.Hour, //60 day
-		ClickHouse:  clickHouse,
+		//ttl:         60 * 24 * time.Hour, //60 day
+		ttl:        0,
+		ClickHouse: clickHouse,
 	}
 	if strings.Contains(tag, "_null") {
 		q.engine = "Null"
@@ -149,10 +150,16 @@ func (q *EventQueue) createTable() error {
 		createSQL += "ENGINE = Null"
 	} else {
 		createSQL += fmt.Sprintf(
-			"ENGINE = %s() ORDER BY time TTL time + INTERVAL %d SECOND",
+			"ENGINE = %s() ORDER BY time",
 			q.engine,
-			int(math.Round(q.ttl.Seconds())),
 		)
+		ttl := int(math.Round(q.ttl.Seconds()))
+		if ttl > 0 {
+			createSQL += fmt.Sprintf(
+				" TTL time + INTERVAL %d SECOND",
+				ttl,
+			)
+		}
 	}
 
 	return q.Exec(q.ctx, createSQL)
