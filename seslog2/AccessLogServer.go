@@ -85,7 +85,6 @@ func (this *AccessLogServer) handleLogParts() {
 		if !ok {
 			continue
 		}
-		content = content[len("escape=json"):]
 		if strings.Contains(content, "escape=json") {
 			content = content[len("escape=json"):]
 		}
