@@ -5,6 +5,7 @@ import (
 	"gopkg.in/mcuadros/go-syslog.v2"
 	"gopkg.in/mcuadros/go-syslog.v2/format"
 	"log"
+	"strings"
 )
 
 type AccessLogServer struct {
@@ -85,7 +86,9 @@ func (this *AccessLogServer) handleLogParts() {
 			continue
 		}
 		content = content[len("escape=json"):]
-
+		if strings.Contains(content, "escape=json") {
+			content = content[len("escape=json"):]
+		}
 		event := make(Event)
 		if err := json.Unmarshal([]byte(content), &event); notOk(err) {
 			continue
